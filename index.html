@@ -115,6 +115,7 @@
             </div>
             <p class="definition-text"><strong>Max position size:</strong> Your comfort level for one stock. Example: "I never want more than 20% of my portfolio in one company."</p>
           </div>
+          <button class="reset-button" onclick="resetBeginner()">Reset calculator</button>
         </div>
 
         <div id="experienced-questions" style="display: none;">
@@ -156,6 +157,36 @@
               <input type="number" id="max-position-exp" min="0" placeholder="20000" class="number-input" onchange="updateCalc()">
             </div>
           </div>
+
+          <div class="question-block">
+            <h3>Exception checklist</h3>
+            <p class="definition-text">Any of these triggered? Framework says to review before executing.</p>
+            <div class="exception-list">
+              <button class="exception-btn" onclick="toggleException(1)">No</button>
+              <span class="exception-label">Still falling (more than 10% in last 5 days)</span>
+            </div>
+            <div class="exception-list">
+              <button class="exception-btn" onclick="toggleException(2)">No</button>
+              <span class="exception-label">Earnings within 5 days (need thesis doc)</span>
+            </div>
+            <div class="exception-list">
+              <button class="exception-btn" onclick="toggleException(3)">No</button>
+              <span class="exception-label">Conviction dropped after news</span>
+            </div>
+            <div class="exception-list">
+              <button class="exception-btn" onclick="toggleException(4)">No</button>
+              <span class="exception-label">Insider selling observed</span>
+            </div>
+            <div class="exception-list">
+              <button class="exception-btn" onclick="toggleException(5)">No</button>
+              <span class="exception-label">4+ tranches this month already</span>
+            </div>
+            <div class="exception-list">
+              <button class="exception-btn" onclick="toggleException(6)">No</button>
+              <span class="exception-label">Dry powder would drop below 10%</span>
+            </div>
+          </div>
+          <button class="reset-button" onclick="resetExperienced()">Reset calculator</button>
         </div>
       </div>
 

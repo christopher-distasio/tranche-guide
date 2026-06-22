@@ -484,3 +484,73 @@ body {
     font-size: 1.5rem;
   }
 }
+
+/* EXCEPTIONS CHECKLIST */
+.exception-list {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  background-color: var(--color-bg-secondary);
+  border-radius: 6px;
+}
+
+.exception-btn {
+  padding: 0.5rem 1rem;
+  background-color: var(--color-bg-white);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  min-width: 60px;
+  transition: all 0.2s ease;
+}
+
+.exception-btn:hover {
+  border-color: var(--color-primary-blue);
+}
+
+.exception-btn.yes {
+  background-color: var(--color-primary-amber);
+  color: white;
+  border-color: var(--color-primary-amber);
+}
+
+.exception-label {
+  font-size: 0.95rem;
+  color: var(--color-text-primary);
+}
+
+/* HIDE NUMBER INPUT SPINNERS */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* RESET BUTTON */
+.reset-button {
+  display: block;
+  margin-top: 2rem;
+  margin-left: auto;
+  margin-right: 0;
+  padding: 0.6rem 1.2rem;
+  background-color: var(--color-bg-secondary);
+  color: var(--color-text-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.reset-button:hover {
+  background-color: var(--color-border);
+  color: var(--color-text-primary);
+}

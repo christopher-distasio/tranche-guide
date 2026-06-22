@@ -90,15 +90,42 @@ function calcExperienced() {
   
   resultCard.style.display = 'block';
   
+  // Check for exceptions
+  const anyException = Object.values(state.exceptions).some(v => v);
+  
   if (afterCost > max) {
     resultText.textContent = 'Skip this dip';
     resultText.className = 'result-verdict danger';
     resultDetail.textContent = `Position would hit $${Math.round(afterCost)} (above $${Math.round(max)} max)`;
   } else {
-    resultText.textContent = `Add $${Math.round(tranche)}`;
-    resultText.className = 'result-verdict success';
-    resultDetail.textContent = `${dip}% dip × $${Math.round(cost)} = $${Math.round(tranche)}`;
+    if (anyException) {
+      resultText.textContent = `Add $${Math.round(tranche)} (review exceptions)`;
+      resultText.className = 'result-verdict warning';
+      resultDetail.textContent = `One or more exceptions triggered. Review before executing.`;
+    } else {
+      resultText.textContent = `Add $${Math.round(tranche)}`;
+      resultText.className = 'result-verdict success';
+      resultDetail.textContent = `${dip}% dip × $${Math.round(cost)} = $${Math.round(tranche)}`;
+    }
   }
+}
+
+// TOGGLE EXCEPTION
+function toggleException(num) {
+  state.exceptions[num] = !state.exceptions[num];
+  const btn = document.querySelector(`button[onclick="toggleException(${num})"]`);
+  
+  if (btn) {
+    if (state.exceptions[num]) {
+      btn.textContent = 'Yes';
+      btn.classList.add('yes');
+    } else {
+      btn.textContent = 'No';
+      btn.classList.remove('yes');
+    }
+  }
+  
+  calcExperienced();
 }
 
 // START CALCULATOR BUTTON
@@ -113,7 +140,37 @@ function startCalculator() {
   }
 }
 
-// SCROLL TO CALCULATOR SMOOTH
-document.addEventListener('DOMContentLoaded', () => {
-  // Any other initialization if needed
-});
+// RESET BEGINNER
+function resetBeginner() {
+  document.getElementById('stock-name').value = '';
+  document.getElementById('stock-count').value = '';
+  document.getElementById('available-money').value = '';
+  document.getElementById('dip-percent-beginner').value = '';
+  document.getElementById('max-position-beginner').value = '';
+  document.querySelector('input[name="position-type"]').checked = false;
+  document.getElementById('stock-count-guidance').innerHTML = '';
+  document.getElementById('result-card').style.display = 'none';
+  updateCalc();
+}
+
+// RESET EXPERIENCED
+function resetExperienced() {
+  document.getElementById('stock-name-exp').value = '';
+  document.getElementById('cost-basis-exp').value = '';
+  document.getElementById('dip-percent-exp').value = '';
+  document.getElementById('dry-powder-exp').value = '';
+  document.getElementById('max-position-exp').value = '';
+  
+  // Reset all exception buttons
+  for (let i = 1; i <= 6; i++) {
+    state.exceptions[i] = false;
+    const btn = document.querySelector(`button[onclick="toggleException(${i})"]`);
+    if (btn) {
+      btn.textContent = 'No';
+      btn.classList.remove('yes');
+    }
+  }
+  
+  document.getElementById('result-card').style.display = 'none';
+  updateCalc();
+}
